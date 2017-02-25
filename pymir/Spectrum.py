@@ -113,7 +113,8 @@ class Spectrum(numpy.ndarray):
         """
         Compute the spectral flatness (ratio between geometric and arithmetic means)
         """
-        geometricMean = scipy.stats.mstats.gmean(abs(self))
+        asArray = self.view(numpy.ndarray)
+        geometricMean = scipy.stats.mstats.gmean(abs(asArray), axis=0)
         arithmeticMean = self.mean()
 
         return geometricMean / arithmeticMean
