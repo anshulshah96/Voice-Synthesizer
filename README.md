@@ -1,4 +1,4 @@
-Genre Classifier
+Voice Synthesizer
 =====================================
 
 Setup
