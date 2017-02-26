@@ -20,7 +20,7 @@ source activate voice
 4. Install Requirements
 ```bash
 sudo apt-get install python-pyaudio
-pip install numpy scipy matplotlib 
+pip install numpy scipy matplotlib sklearn
 conda install nb_conda
 ```
 
