@@ -35,7 +35,7 @@ chords = [ {'name': "C", 'vector' :[1,0,0,0,1,0,0,1,0,0,0,0], 'key': 0, 'mode': 
 			{'name': "B", 'vector' :[0,0,0,1,0,0,1,0,0,0,0,1],  'key': 11, 'mode': 1 },
 			{'name': "Bm", 'vector':[0,0,1,0,0,0,1,0,0,0,0,1],  'key': 11, 'mode': 0 }]
 
-def chroma(spectrum):
+def chroma(spectrum, do_sum = True):
 	"""
 	Compute the 12-ET chroma vector from this spectrum
 	"""
@@ -55,8 +55,11 @@ def chroma(spectrum):
 		chroma[pitchClass] = chroma[pitchClass] + abs(spectrum[index])
 
 	# Normalize the chroma vector
-	maxElement = max(chroma)
-	chroma = [c / maxElement for c in chroma]
+	if do_sum:
+		norm = sum(chroma)
+	else:
+		norm = max(chroma)
+	chroma = [c / norm for c in chroma]
 	
 	return chroma
 
