@@ -19,10 +19,12 @@ source activate voice
 
 4. Install Requirements
 ```bash
-sudo apt-get install python-pyaudio
-pip install numpy scipy matplotlib sklearn
+sudo apt-get install python-pyaudio libopenblas-dev
+pip install numpy scipy matplotlib sklearn pandas tables Theano
 conda install nb_conda
 ```
+
+5. In ~/.keras/keras.json change tensorflow to theano
 
 License
 =========
