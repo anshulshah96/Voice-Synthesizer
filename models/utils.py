@@ -18,7 +18,7 @@ def get_partitions(df, group_by_column='fname'):
 	for name, group in df:
 	    file_names = group[group_by_column].drop_duplicates()
 	    file_names = file_names[:data_percentage]
-	    file_train, file_test, _, _ = train_test_split(file_names, file_names, test_size=0.4, random_state=42)
+	    file_train, file_test, _, _ = train_test_split(file_names, file_names, test_size=0.3, random_state=42)
 	    file_test, file_cv, _, _ = train_test_split(file_test, file_test, test_size=0.5, random_state=42)
 	    df_train = df_train.append(group[group[group_by_column].isin(file_train)])
 	    df_cross = df_cross.append(group[group[group_by_column].isin(file_cv)])

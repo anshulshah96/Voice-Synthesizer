@@ -34,7 +34,7 @@ class SVM():
             for i in range(len(group[self.feature_list])):
                  y_train.append(name)
         
-        clf = OneVsRestClassifier(SVC(kernel='linear', C=1., random_state=42))
+        clf = OneVsRestClassifier(SVC(kernel='rbf', C=1., random_state=42))
         model = clf.fit(x_train, y_train)
         self.model = model
 
