@@ -8,14 +8,13 @@ class SVM():
     def __init__(self, feature_list):
         self.feature_list = feature_list
 
-    def predict(self, df_cross, clf):
+    def predict(self, df_cross):
         df_cross.loc[:,self.feature_list] = self.scaler.transform(df_cross[self.feature_list])
         dfg = df_cross.groupby('fname')
         pred_file_pid = pd.DataFrame(columns=('fname', 'id'))
-
         for fname, group in dfg:
             x_test = group[self.feature_list]
-            model = clf
+            model = self.model
             output = model.predict(x_test)
             pred_file_pid = pred_file_pid.append(pd.DataFrame(data={
                 'fname':fname,
@@ -38,10 +37,9 @@ class SVM():
         model = clf.fit(x_train, y_train)
         self.model = model
 
-    def predict_df(self, df_cross, clf):
-        pred_file_pid = self.predict(df_cross, clf)
-
+    def predict_df(self, df_cross):
+        pred_file_pid = self.predict(df_cross)
+        
         pred_file_pid.sort_values('fname', inplace=True)
-
         orig_file_pid = df_cross[['id','fname']].drop_duplicates().sort_values('fname')
         print(metrics.classification_report(orig_file_pid['id'], pred_file_pid['id']))
