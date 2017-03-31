@@ -42,4 +42,4 @@ class SVM():
         
         pred_file_pid.sort_values('fname', inplace=True)
         orig_file_pid = df_cross[['id','fname']].drop_duplicates().sort_values('fname')
-        print(metrics.classification_report(orig_file_pid['id'], pred_file_pid['id']))
+        return metrics.classification_report(orig_file_pid['id'], pred_file_pid['id'])
