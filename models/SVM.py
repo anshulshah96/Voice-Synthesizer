@@ -5,8 +5,9 @@ from sklearn.svm import SVC
 
 
 class SVM():
-    def __init__(self, feature_list):
+    def __init__(self, feature_list, kernel = 'rbf'):
         self.feature_list = feature_list
+        self.kernel = kernel
 
     def predict(self, df_cross):
         df_cross.loc[:,self.feature_list] = self.scaler.transform(df_cross[self.feature_list])
@@ -33,7 +34,7 @@ class SVM():
             for i in range(len(group[self.feature_list])):
                  y_train.append(name)
         
-        clf = OneVsRestClassifier(SVC(kernel='rbf', C=1., random_state=42))
+        clf = OneVsRestClassifier(SVC(kernel=self.kernel, C=1., random_state=42))
         model = clf.fit(x_train, y_train)
         self.model = model
 
