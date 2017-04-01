@@ -23,7 +23,7 @@ class MultiGauss():
             plist = np.sum(np.log(dist), axis =0)
             pred_file_pid = pred_file_pid.append(pd.DataFrame(data={
                 'fname':fname,
-                'id':[np.argmax(plist)]
+                'id':[self.ids[np.argmax(plist)]]
             }))
         return pred_file_pid
     
@@ -34,12 +34,15 @@ class MultiGauss():
         dfg = df_train.groupby('id')
         mm = list()
         covm = list()
+        ids = list()
         for name, group in dfg:
             mm.append(np.mean(group[self.feature_list],axis=0))
             covm.append(np.cov(group[self.feature_list], rowvar=False))
-        
+            ids.append(int(name))
+
         self.mm = mm
         self.covm = covm
+        self.ids = ids
 
     def predict_df(self, df_cross):
         pred_file_pid = self.predict(df_cross)
