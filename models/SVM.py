@@ -44,3 +44,10 @@ class SVM():
         pred_file_pid.sort_values('fname', inplace=True)
         orig_file_pid = df_cross[['id','fname']].drop_duplicates().sort_values('fname')
         return metrics.classification_report(orig_file_pid['id'], pred_file_pid['id'])
+
+    def get_results(self, df_cross):
+        pred_file_pid = self.predict(df_cross)
+        pred_file_pid.sort_values('fname', inplace=True)
+        orig_file_pid = df_cross[['id','fname']].drop_duplicates().sort_values('fname')
+
+        return orig_file_pid, pred_file_pid
