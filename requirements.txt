@@ -59,7 +59,6 @@ singledispatch==3.4.0.3
 six==1.10.0
 sklearn==0.0
 subprocess32==3.2.7
-tables==3.3.0
 tensorflow==1.0.0
 terminado==0.6
 testpath==0.3
